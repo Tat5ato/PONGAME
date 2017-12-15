@@ -10,19 +10,12 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp3
 {
-    public partial class Pong : Form
+    public partial class Form1 : Form
     {
-        const int paddlespeed = 3, ballspeed = 3, top = 0, bottom = 350;
-        float pointcounterplayer1 = 0;
-        float pointcounterplayer2 = 0;
-        bool uppressedp1, downpressedp1, uppressedp2, downpressedp2, ballmovingleft, ballmovingright, player1scores, player2scores, player1win, player2win;
+        const int paddlespeed = 3, top = 0, bottom = 350;
+        bool uppressedp1, downpressedp1, uppressedp2, downpressedp2;
 
-        private void paddle1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        public Pong()
+        public Form1()
         {
             InitializeComponent();
         }
@@ -33,16 +26,16 @@ namespace WindowsFormsApp3
             if (uppressedp1)
             {
                 paddle1.Location = new Point(paddle1.Location.X,
-                    Math.Max(top,
-                    Math.Min(bottom,
+                    Math.Max (top, 
+                    Math.Min(bottom, 
                     paddle1.Location.Y - paddlespeed
                     )));
             }
             if (downpressedp1)
             {
-                paddle1.Location = new Point(paddle1.Location.X,
-                    Math.Max(top,
-                    Math.Min(bottom,
+                paddle1.Location = new Point(paddle1.Location.X, 
+                    Math.Max(top, 
+                    Math.Min(bottom, 
                     paddle1.Location.Y + paddlespeed
                     )));
             }
@@ -50,68 +43,23 @@ namespace WindowsFormsApp3
             //player 2
             if (uppressedp2)
             {
-                paddle2.Location = new Point(paddle2.Location.X,
-                    Math.Max(top,
-                    Math.Min(bottom,
+                paddle2.Location = new Point(paddle2.Location.X, 
+                    Math.Max(top, 
+                    Math.Min(bottom, 
                     paddle2.Location.Y - paddlespeed
                     )));
             }
             if (downpressedp2)
             {
-                paddle2.Location = new Point(paddle2.Location.X,
-                    Math.Max(top,
-                    Math.Min(bottom,
+                paddle2.Location = new Point(paddle2.Location.X, 
+                    Math.Max(top, 
+                    Math.Min(bottom, 
                     paddle2.Location.Y + paddlespeed
                     )));
             }
-
-            //ball
-            void Start()
-            {
-                Random random = new Random();
-                int randomNumber = random.Next(0, 4);
-
-                Math.Max(top,
-                 Math.Min(bottom,
-                 ball.Location.X + randomNumber
-                 ))); 
-              
-            
-            if (ballmovingleft)
-            {
-                ballmovingleft = true;
-                ballmovingright = false;
-            }
-
-
-
-
-            //point stuff
-            if (player1scores == true)
-            {
-                pointcounterplayer1 + 1;
-            }
-
-            if (player2scores == true)
-            {
-                pointcounterplayer2 + 1;
-            }
-
-            if (pointcounterplayer1 == 5)
-            {
-                player1win = true;
-                player2win = false;
-            }
-
-            if (pointcounterplayer2 == 5)
-            {
-                player2win = true;
-                player1win = false;
-            }
-
         }
 
-        private void Pong_KeyDown(object sender, KeyEventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             //player 1
             switch (e.KeyCode)
@@ -135,7 +83,7 @@ namespace WindowsFormsApp3
                     break;
             }
         }
-        private void Pong_KeyUp(object sender, KeyEventArgs e)
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             //player 1
             switch (e.KeyCode)
