@@ -1,0 +1,164 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApp3
+{
+    public partial class Pong : Form
+    {
+        const int paddlespeed = 3, ballspeed = 3, top = 0, bottom = 350;
+        float pointcounterplayer1 = 0;
+        float pointcounterplayer2 = 0;
+        bool uppressedp1, downpressedp1, uppressedp2, downpressedp2, ballmovingleft, ballmovingright, player1scores, player2scores, player1win, player2win;
+
+        private void paddle1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public Pong()
+        {
+            InitializeComponent();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            //player 1
+            if (uppressedp1)
+            {
+                paddle1.Location = new Point(paddle1.Location.X,
+                    Math.Max(top,
+                    Math.Min(bottom,
+                    paddle1.Location.Y - paddlespeed
+                    )));
+            }
+            if (downpressedp1)
+            {
+                paddle1.Location = new Point(paddle1.Location.X,
+                    Math.Max(top,
+                    Math.Min(bottom,
+                    paddle1.Location.Y + paddlespeed
+                    )));
+            }
+
+            //player 2
+            if (uppressedp2)
+            {
+                paddle2.Location = new Point(paddle2.Location.X,
+                    Math.Max(top,
+                    Math.Min(bottom,
+                    paddle2.Location.Y - paddlespeed
+                    )));
+            }
+            if (downpressedp2)
+            {
+                paddle2.Location = new Point(paddle2.Location.X,
+                    Math.Max(top,
+                    Math.Min(bottom,
+                    paddle2.Location.Y + paddlespeed
+                    )));
+            }
+
+            //ball
+            void Start()
+            {
+                Random random = new Random();
+                int randomNumber = random.Next(0, 4);
+
+                Math.Max(top,
+                 Math.Min(bottom,
+                 ball.Location.X + randomNumber
+                 ))); 
+              
+            
+            if (ballmovingleft)
+            {
+                ballmovingleft = true;
+                ballmovingright = false;
+            }
+
+
+
+
+            //point stuff
+            if (player1scores == true)
+            {
+                pointcounterplayer1 + 1;
+            }
+
+            if (player2scores == true)
+            {
+                pointcounterplayer2 + 1;
+            }
+
+            if (pointcounterplayer1 == 5)
+            {
+                player1win = true;
+                player2win = false;
+            }
+
+            if (pointcounterplayer2 == 5)
+            {
+                player2win = true;
+                player1win = false;
+            }
+
+        }
+
+        private void Pong_KeyDown(object sender, KeyEventArgs e)
+        {
+            //player 1
+            switch (e.KeyCode)
+            {
+                case Keys.W:
+                    uppressedp1 = true;
+                    break;
+                case Keys.S:
+                    downpressedp1 = true;
+                    break;
+            }
+
+            //player 2
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                    uppressedp2 = true;
+                    break;
+                case Keys.Down:
+                    downpressedp2 = true;
+                    break;
+            }
+        }
+        private void Pong_KeyUp(object sender, KeyEventArgs e)
+        {
+            //player 1
+            switch (e.KeyCode)
+            {
+                case Keys.W:
+                    uppressedp1 = false;
+                    break;
+                case Keys.S:
+                    downpressedp1 = false;
+                    break;
+            }
+
+            //player 2
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                    uppressedp2 = false;
+                    break;
+                case Keys.Down:
+                    downpressedp2 = false;
+                    break;
+            }
+        }
+
+    }
+}
